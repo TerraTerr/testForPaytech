@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static com.olga.testForPaytech.constants.Constants.*;
+
 @Controller
 public class PaymentController {
 
-    @GetMapping("/add-payment")
+    @GetMapping(ADD_PAYMENT)
     public String showForm(Model model) {
-        model.addAttribute("payment", new Payment());
-        return "add-payment";
+        model.addAttribute(PAYMENT, new Payment());
+        return ADD_PAYMENT_NAME_OF_FILE;
     }
 
-    @PostMapping("/add-payment")
+    @PostMapping(ADD_PAYMENT)
     public String submitForm(@ModelAttribute Payment payment, RedirectAttributes redirectAttributes) {
         double amount = payment.getAmount();
 
@@ -30,23 +32,24 @@ public class PaymentController {
         try {
             ResponseEntity<String> response = paymentAPIService.sentPostRequest(amount);
             String url = paymentAPIService.parseAnswer(response.getBody());
-            return "redirect:" + url;
+
+            return REDIRECT + url;
         } catch (HttpClientErrorException httpClientErrorException) {
             String error = httpClientErrorException.getStatusCode().toString();
 
             String[] errors = error.split(" ");
 
-            redirectAttributes.addFlashAttribute("statusCode", Integer.parseInt(errors[0]));
-            redirectAttributes.addFlashAttribute("errorMessage", errors[1]);
+            redirectAttributes.addFlashAttribute(STATUS_CODE, errors[0]);
+            redirectAttributes.addFlashAttribute(ERROR_MESSAGE, errors[1]);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
 
-        return "redirect:/error-payment";
+        return REDIRECT + ERROR_PAYMENT_NAME_OF_FILE;
     }
 
-    @GetMapping("/error-payment")
+    @GetMapping(ERROR_PAYMENT)
     public String showErrorForm(Model model) {
-        return "error-payment";
+        return ERROR_PAYMENT_NAME_OF_FILE;
     }
 }

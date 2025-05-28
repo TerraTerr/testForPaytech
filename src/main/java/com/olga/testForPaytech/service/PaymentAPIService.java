@@ -28,10 +28,10 @@ public class PaymentAPIService {
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put(PAYMENT_TYPE, PAYMENT_TYPE_DEPOSIT);
         requestBody.put(AMOUNT, amount);
-        requestBody.put(CURENCY, CURENCY_EUR);
+        requestBody.put(CURRENCY, CURRENCY_EUR);
 
         Map<String, String> customer = new HashMap<>();
-        customer.put("referenceId", "abc");
+        customer.put(REFERENCE_ID, REFERENCE_ID_VALUE);
         requestBody.put(CUSTOMER, customer);
 
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
