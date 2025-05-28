@@ -42,7 +42,7 @@ public class PaymentController {
             redirectAttributes.addFlashAttribute(STATUS_CODE, errors[0]);
             redirectAttributes.addFlashAttribute(ERROR_MESSAGE, errors[1]);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            return REDIRECT + ERROR_PAGE_NAME_OF_FILE;
         }
 
         return REDIRECT + ERROR_PAYMENT_NAME_OF_FILE;
@@ -51,5 +51,10 @@ public class PaymentController {
     @GetMapping(ERROR_PAYMENT)
     public String showErrorForm(Model model) {
         return ERROR_PAYMENT_NAME_OF_FILE;
+    }
+
+    @GetMapping(ERROR_PAGE)
+    public String showErrorPageForm(Model model) {
+        return ERROR_PAGE_NAME_OF_FILE;
     }
 }

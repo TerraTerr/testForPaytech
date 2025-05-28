@@ -9,6 +9,9 @@ public class Constants {
     public static final String ERROR_PAYMENT = "/error-payment";
     public static final String ERROR_PAYMENT_NAME_OF_FILE = "error-payment";
 
+    public static final String ERROR_PAGE = "/error-page";
+    public static final String ERROR_PAGE_NAME_OF_FILE = "error-page";
+
     public static final String URL = "https://engine-sandbox.pay.tech/api/v1/payments";
 
     public static final String AUTHORIZATION = "Authorization";
