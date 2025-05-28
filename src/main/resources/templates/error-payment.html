@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ошибка</title>
+</head>
+<body>
+    <h1>Не удалось произвести оплату</h1>
+    <p>Код: <span th:text="${statusCode}"></span></p>
+    <p th:text="${errorMessage}"></p>
+    <form action="/add-payment" method="get">
+        <button type="submit">На главную</button>
+    </form>
+</body>
+</html>

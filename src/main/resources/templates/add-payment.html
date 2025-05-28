@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Оплатить</title>
+</head>
+<body>
+    <h1>Форма оплаты</h1>
+    <form th:action="@{/add-payment}" th:object="${payment}" method="post">
+        <label>Сумма: <input type="number" th:field="*{amount}" /></label><br/>
+        <button type="submit">Оплатить</button>
+    </form>
+</body>
+</html>
